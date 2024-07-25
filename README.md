@@ -11,6 +11,7 @@
  + nginx: web на порту 81
 
 # Запуск
+##### в docker-compose.yml для сервиса backend указать API_KEY
     docker compose up -d
 
 
