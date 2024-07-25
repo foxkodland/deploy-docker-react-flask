@@ -1,0 +1,35 @@
+networks:
+  dev:
+
+services:
+  nginx:
+    restart: always
+    image: nginx:stable-alpine
+    ports:
+      - "81:81"
+      # - "443:443"
+    volumes:
+      - './nginx.conf:/etc/nginx/nginx.conf'
+      # - '/etc/letsencrypt:/etc/letsencrypt'
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - dev
+    
+
+  backend:
+    restart: always
+    build:
+      context: ./backend
+    environment:
+      API_KEY: ""
+    networks:
+      - dev
+
+  frontend:
+    restart: always
+    build:
+      context: ./frontend
+    networks:
+      - dev
